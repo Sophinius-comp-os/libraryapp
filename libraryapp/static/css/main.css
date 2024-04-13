@@ -1,0 +1,72 @@
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+/* Styles for the search results */
+.search-results {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: left;
+}
+
+.search-results h2 {
+	font-size: 24px;
+	margin-bottom: 20px;
+}
+
+.search-results ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.search-results li {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.download-link {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #007bff;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+.download-link:hover {
+	background-color: #0056b3;
+}
+
+/* Styles for the "Go Back" button */
+.go-back-button {
+	margin-top: 20px;
+	padding: 15px 30px;
+	font-size: 20px;
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+/* Styles for the rotating search lens */
+.rotating-lens {
+	width: 100px;
+	height: 100px;
+	margin: 50px auto;
+	animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.go-back-button:hover {
+	background-color: #218838;
+}

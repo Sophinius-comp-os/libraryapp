@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block title %}
+Issuing book
+{% endblock %}
+{% block content %}
+<form id="issueBookForm" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   <div class="mb-3">
+    <label for="book" class="form-label">College:</label>
+    <select id="book" name="book" class="form-select">
+        <!-- books will be populated dynamically via AJAX -->
+    </select>
+    </div>
+    <div class="mb-3">
+    <label for="member" class="form-label">Member:</label>
+    <select id="member" name="member" class="form-select">
+        <!-- members will be populated dynamically via AJAX -->
+    </select>
+    </div>
+    <button  onclick="issueBook()" type="submit" class="btn btn-outline-primary btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+        Issue Book
+    </button>
+</form>
+{% endblock %}
+
+

@@ -1,0 +1,77 @@
+{% load cloudinary %} {% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Search Results</title>
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="https://res.cloudinary.com/dwdblvoxm/image/upload/f_auto,q_auto/v1/static/7349bd7f47b557e33a428333fe1fe5b0"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="https://res.cloudinary.com/dwdblvoxm/image/upload/f_auto,q_auto/v1/static/e38d43ff0fff5fb1addb09dd7fe1a82f"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="https://res.cloudinary.com/dwdblvoxm/image/upload/f_auto,q_auto/v1/static/f8b2e1659a67f79149889370df68c2ad"
+		/>
+		<link
+			rel="manifest"
+			href="https://res.cloudinary.com/dwdblvoxm/raw/upload/v1/static/053100cb84a50d2ae7f5492f7dd7f25e.webmanifest"
+		/>
+		<link
+			rel="apple-touch-icon"
+			sizes="512x512"
+			href="https://res.cloudinary.com/dwdblvoxm/image/upload/v1703278845/static/58675f2fe4dd70f04b6b0588e21fccae.png"
+		/>
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	</head>
+	<body>
+		<div class="rotating-lens">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="100"
+				height="100"
+				fill="currentColor"
+				class="bi bi-search"
+				viewBox="0 0 16 16"
+			>
+				<path
+					d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+				/>
+			</svg>
+		</div>
+		<!-- Search results -->
+		<div class="search-results">
+			{% if books %}
+			<h2>Search Results for '{{ query }}'</h2>
+			<ul>
+				{% for book in books %}
+				<li>Title: {{ book.title }}, Author: {{ book.author }}</li>
+				<li>Stock: {{ book.stock }}</li>
+				<a class="download-link" download="" href="{{ book.book_url }}"
+					>Download</a
+				>
+				{% endfor %}
+			</ul>
+			{% else %}
+			<h2>No results found for '{{ query }}'</h2>
+			{% endif %}
+		</div>
+
+		<!-- "Go Back" button -->
+		<button class="go-back-button" onclick="goBack()">Go Back</button>
+
+		<!-- JavaScript function to go back -->
+		<script>
+			function goBack() {
+				window.history.back();
+			}
+		</script>
+	</body>
+</html>

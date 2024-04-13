@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}
+{{member.name}} info
+{% endblock %}
+{% block content %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <td>ID: </td>
+            <td>Name: </td>
+            <td>Email: </td>
+            <td>Phone: </td>
+            <td>Balance: </td>
+            <td>Books issued: </td>
+            <td>Books returned: </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ member.member_id }}</td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.phone }}</td>
+            <td>{{ member.balance }}</td>
+            <td>{{ member.books_issued.count|default_if_none:0 }}</td>
+            <td>{{ member.book_returned.count|default_if_none:0 }}</td>
+        </tr>
+</table>
+
+    <h2>Books Issued</h2>
+    <ul>
+        {% for book in books_issued %}
+            <li>{{ book.title }} by {{ book.author }}
+                (Issued on: {{ book.issued_date|date:"Y-m-d H:i:s" }})
+            </li>
+        {% empty %}
+            <li>No books issued yet</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

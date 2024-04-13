@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+{% block title %}
+Upload books
+{% endblock %}
+{% block content %}
+    <div  class="container bg-light shadow-lg p-4 form-layout">
+        <h1 class="text-center">Upload books</h1>
+        <p class="text-center">Upload books in .pdf or .docx format upto 5mb</p>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-outline-primary" type="submit" value="Upload" />
+</form>
+    </div>
+{% endblock %}

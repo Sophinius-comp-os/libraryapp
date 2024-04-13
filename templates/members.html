@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}
+Members
+{% endblock %}
+{% block content %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Balance</th>
+            <th>
+                <a href="{% url 'add_members' %}" class="btn btn-primary btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Add Member
+                </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+            <tr>
+                <td>{{ member.member_id }}</td>
+                <td>{{ member.name }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.phone }}</td>
+                <td id="balance-{{ member.member_id }}">{{ member.balance }}</td>
+            <td>
+                <a href="{% url 'view_member' member.pk %}">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </a>
+            </td>
+             <td>
+                <a href="{% url 'update_member' member.pk %}">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <i class="bi bi-pencil-square"></i> Update
+                        </button>
+                </a>
+                </td>
+                <td>
+                    <form id="deleteForm{{ member.pk }}" action="{% url 'delete_member' member.pk %}" method="POST">
+                {% csrf_token %}
+                 <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDelete({{ member.pk }})">
+                    <span class="glyphicon glyphicon-plus"></span>
+                 <i class="bi bi-trash"></i> Delete
+                </button>
+            </form>
+            </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No members added yet</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    function displayWarningAlert(memberId, balance) {
+        if (balance <= -500) {
+            var balanceCell = $("#balance-" + memberId);
+            balanceCell.append('<span class="bi bi-triangle-fill text-warning" title="Low Balance"></span>');
+        }
+    }
+    {% for member in members %}
+        displayWarningAlert({{ member.member_id }}, {{ member.balance }});
+    {% endfor %}
+</script>
+{% endblock %}

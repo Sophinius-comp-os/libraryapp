@@ -1,0 +1,60 @@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'books' %}"><strong>Library</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'books' %}"><strong>Home</strong></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'members' %}"><strong>Members</strong></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <strong>Dropdown</strong>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'add_members' %}">Add members</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_books' %}">Add books</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Contact Admin</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form method="get" id="search-input" action="{% url 'search_books' %}" class="d-flex" role="search">
+        <input class="form-control me-2" name="q" value="{{ query }}" 
+               type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<script>
+  $(document).ready(function () {
+      $("#search-input").on("input", function () {
+          var query = $(this).val();
+          if (query.trim() === "") {
+              // Clear the results if the search input is empty
+              $("#search-results-container").empty();
+              return;
+          }
+
+          $.ajax({
+              url: '/search_books/',
+              method: 'GET',
+              data: {q: query},
+              success: function (data) {
+                  $("#search-results-container").html(data);
+              },
+              error: function (error) {
+                  console.error('Error searching books:', error);
+              }
+          });
+      });
+  });
+</script>

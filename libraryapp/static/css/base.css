@@ -1,0 +1,88 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+title
+{
+    font-size: 5vw;
+}
+#sortButton
+{
+    margin-left: 10px;
+}
+#btn-reg
+{
+   transition: 0.9s all ease-in-out!important;
+}
+
+#btn-reg
+{
+    transform: scale(1.5)!important;
+}
+
+#mm
+{
+  position: absolute;
+  right: 0;
+}
+
+
+/* Default styles for the form layout */
+.form-layout {
+    border-radius: 15px;
+    padding: 3% !important;
+    width: 500px;
+    margin: auto;
+}
+
+/* Media query for smaller screens (e.g., mobile devices) */
+@media (max-width: 768px) {
+    .form-layout {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.table {
+    min-height: .01% !important;
+    overflow-x: auto !important;
+}
+
+@media screen and (max-width: 767px) {
+    .table{
+        width: 100% !important;
+        margin-bottom: 15px !important;
+        overflow-y: hidden !important;
+        -ms-overflow-style: -ms-autohiding-scrollbar !important;
+        border: 1px solid #ddd !important;
+    }
+    .table-responsive > .table {
+        margin-bottom: 0 !important;
+    }
+    .table-responsive > .table > thead > tr > th,
+    .table-responsive > .table > tbody > tr > th,
+    .table-responsive > .table > tfoot > tr > th,
+    .table-responsive > .table > thead > tr > td,
+    .table-responsive > .table > tbody > tr > td,
+    .table-responsive > .table > tfoot > tr > td {
+        white-space: nowrap !important;
+    }
+}
+
+.no-results {
+    text-align: center;
+    padding: 20px;
+}
+
+.no-results i {
+    color: #ccc;
+}

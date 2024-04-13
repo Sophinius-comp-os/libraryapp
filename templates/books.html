@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Home
+{% endblock %}
+{% block content %}
+    <table id="BookTable" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Quantity</th>
+        
+                <a href="{% url 'add_books' %}" class="btn btn-success btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
+                Add Books
+                </a>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.stock }}</td>
+                <td>
+                    <a href="{% url 'update_book' book.pk %}">
+                        <button type="submit" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-pencil-square"></i> Update</button>
+                    </a>
+                </td>
+                <td>
+                    <a target="_blank" rel="noreferrer nofollow" href="{{ book.book_url }}">
+                        <span class="glyphicon glyphicon-plus"></span>
+                         <i class="bi bi-eye"></i>
+                    </a>
+                </td>
+                <td>
+                   <a class="btn btn-outline-primary btn-sm" href="{{ book.book_url }}" download="">
+                    <span class="glyphicon glyphicon-plus"></span>
+                        <i class="bi bi-download"></i> Download</a>
+                </td>
+                <td>
+    <form id="deleteForm{{ book.pk }}" action="{% url 'delete_book' book.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="button" class="btn btn-outline-danger btn-sm" onclick="confirmDelete('{{ book.pk }}')">
+            <span class="glyphicon glyphicon-plus"></span>
+            <i class="bi bi-trash"></i> Delete
+        </button>
+    </form>
+</td>
+{#            <td>#}
+{#                    {% if book.get_cover_preview_url %}#}
+{#                        <img src="{{ book.get_cover_preview_url }}" alt="Cover Preview" width="50" height="50">#}
+{#                    {% else %}#}
+{#                        No Preview#}
+{#                    {% endif %}#}
+{#                </td>#}
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="4">No books available yet click on add books to get started</td>
+            </tr>  
+        {% endfor %}
+    </tbody>
+</table>
+    <a href="{% url 'issue_book' %}" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+    Issue Books
+    </a>
+    <a href="{% url 'issue_book'  %}" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-plus"></span>
+    Order return <!--Will send a message to the client on the frontend -->
+    </a>
+    
+    <script>
+        $(document).ready(function() {
+        var table = $('#BookTable').DataTable();
+        });
+    </script>
+{% endblock %}
